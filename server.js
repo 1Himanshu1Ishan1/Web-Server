@@ -2,23 +2,28 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-// Middleware 
+// Middleware
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
-  next(); 
+  next();
 });
 
-// Route 1  Home PAGE
+//  Home Page
 app.get('/', (req, res) => {
-  res.send('Welcome to the Home Page');
+  res.status(200).send(' Welcome to the Home Page!');
 });
 
-// Route 2 - About PAGE
+//  About Page
 app.get('/about', (req, res) => {
-  res.send('This is the About Page.');
+  res.status(200).send('This is the About Page.');
 });
 
-// Starting the server
+// 404 Handler 
+app.use((req, res) => {
+  res.status(404).send(' 404 - Page Not Found');
+});
+
+// Starting the Server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(` Server is running at http://localhost:${PORT}`);
 });
